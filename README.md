@@ -22,7 +22,7 @@ In the initial stage, the camera uses color detection and the least squares meth
 ![Board localization](./docs/imgs/tasks/board_localization.png "Board localization")
 
 ## Task: Press blue/red button
-In press blue and button tasks, the robot approaches the button and apply a 10N force to it.
+In press blue and button tasks, the robot approaches the desired button and apply a 10N force to it.
 ![Press blue button](./docs/imgs/tasks/press_blue_button.png "Press blue button")
 
 ## Task: Move slider
@@ -30,6 +30,7 @@ The manipulator with the camera installed at the end-effector detect the referen
 ![Move slider](./docs/imgs/tasks/move_slider.png "Move slider")
 
 ## Task: Plug probe
+The probe connector is grasped and moved to the desired red hole. The insertion is performed exploiting the force controller, by apply a 20N force on the vertical axis.
 ![Plug probe](./docs/imgs/tasks/moving_plug.png "Plug probe")
 
 ## Task: Open door
