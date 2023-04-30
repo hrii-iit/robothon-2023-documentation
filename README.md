@@ -3,7 +3,9 @@ This repo contains the project documentation of the tasks developed by "Team Upc
 
 ## Hardware setup
 The hardware setup is composed by two [Franka Emika](https://www.franka.de/) robots installed on a working table. An [Intel Realsense D435i](https://www.intelrealsense.com/depth-camera-d435i/) as been mounted on a Franka Emika end-effector. 
-![Hardware setup](./docs/imgs/hardware_setup.png "Hardware setup")
+<p align="center">
+  <img src="./docs/imgs/hardware_setup.png" alt="Hardware setup" width="100%">
+</p>
 
 Customized 3D printed fingertips have been designed: small tip for fine precision task (Press button and Move slider) and cross design to enable precise grasping of the probe from both directions. 
 <p align="center">
@@ -13,7 +15,9 @@ Customized 3D printed fingertips have been designed: small tip for fine precisio
 ## Software architecture
 The software architecture implemented for the competition relies on a finite state machine, where each task is a state. Through a reconfigurable config file, it is possible to define the execution order of the tasks.
 
-![Software architecture](./docs/imgs/sw_architecture.png "Software architecture")
+<p align="center">
+  <img src="./docs/imgs/sw_architecture.png" alt= Software architecture width="100%">
+</p>
 
 A cartesian hybrid motion-force controller as been implemented in order to switch from motion control to force control.
 
@@ -34,9 +38,11 @@ The probe connector is grasped and moved to the desired red hole. The insertion 
 ![Plug probe](./docs/imgs/tasks/moving_plug.png "Plug probe")
 
 ## Task: Open door
+The door open task has been performed grasping the door handle. A semi-circular motion of 90° allowed the door opening.
 ![Open door](./docs/imgs/tasks/open_door3.png "Open door")
 
 ## Task: Probe circuit
+A fine grasping of the probe is perfoming thanks to the custom 3D printed fingertips. The circuit is therefore probed.
 ![Probe circuit](./docs/imgs/tasks/probe2.png "Probe circuit")
 
 ## Bring-your-own-device challenge
@@ -50,7 +56,15 @@ The probe connector is grasped and moved to the desired red hole. The insertion 
 - [robothon-2023-fsm](https://github.com/hrii-iit/robothon-2023-fsm): Finite state machine to run the framework developed for the Robothon Grand Challenge 2023.
 
 ## Quick start
+For the quick start, please refere to the following [instructions](https://github.com/hrii-iit/robothon-2023-fsm#readme).
 
+### Usage
+To launch the fsm bringup, run the following command:
+```bash
+roslaunch hrii_task_board_fsm main_fsm.launch
+```
+
+In the file config/fsm/default_task_order.yaml you can select the task execution order. You can also define a customized file that will be ignored by git, just create it in the same folder under the name custom_task_order.yaml
 
 ## Team members
 
