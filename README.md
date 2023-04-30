@@ -9,43 +9,68 @@ The hardware setup is composed by two [Franka Emika](https://www.franka.de/) rob
 
 Customized 3D printed fingertips have been designed: small tip for fine precision task (Press button and Move slider) and cross design to enable precise grasping of the probe from both directions. 
 <p align="center">
-  <img src="./docs/imgs/fingertips.png" alt= “Fingertips” width="35%" height="35%">
+  <img src="./docs/imgs/fingertips.png" alt= “Fingertips” width="30%">
 </p>
 
 ## Software architecture
 The software architecture implemented for the competition relies on a finite state machine, where each task is a state. Through a reconfigurable config file, it is possible to define the execution order of the tasks.
 
 <p align="center">
-  <img src="./docs/imgs/sw_architecture.png" alt= Software architecture width="100%">
+  <img src="./docs/imgs/sw_architecture.png" alt="Software architecture" width="100%">
 </p>
 
 A cartesian hybrid motion-force controller as been implemented in order to switch from motion control to force control.
 
 ## Task: Board localization
 In the initial stage, the camera uses color detection and the least squares method to accurately detect the blue and red buttons on the board and gain an initial perception of the board's location in the world frame using the urdf of the board. Later, the arm moves towards the board and uses visual servoing to detect specific features, position them at the center of the camera's field of view and improve the accuracy of the board's position and orientation estimation.
-![Board localization](./docs/imgs/tasks/board_localization.png "Board localization")
+<p align="center">
+  <img src="./docs/imgs/tasks/board_localization.png" alt="Board localization" width="80%">
+</p>
+
 
 ## Task: Press blue/red button
 In press blue and button tasks, the robot approaches the desired button and apply a 10N force to it.
-![Press blue button](./docs/imgs/tasks/press_blue_button.png "Press blue button")
+<p align="center">
+  <img src="./docs/imgs/tasks/press_blue_button.png" alt="Press blue button" width="80%">
+</p>
+
 
 ## Task: Move slider
 The manipulator with the camera installed at the end-effector detect the reference triangle on the M5 display. The robot move the slider applying the computed displacement. This is repeated for the second reference.
-![Move slider](./docs/imgs/tasks/move_slider.png "Move slider")
+<p align="center">
+  <img src="./docs/imgs/tasks/move_slider.png" alt="Move slider" width="80%">
+</p>
 
 ## Task: Plug probe
 The probe connector is grasped and moved to the desired red hole. The insertion is performed exploiting the force controller, by apply a 20N force on the vertical axis.
-![Plug probe](./docs/imgs/tasks/moving_plug.png "Plug probe")
+<p align="center">
+  <img src="./docs/imgs/tasks/moving_plug.png" alt="Plug probe" width="80%">
+</p>
 
 ## Task: Open door
 The door open task has been performed grasping the door handle. A semi-circular motion of 90° allowed the door opening.
-![Open door](./docs/imgs/tasks/open_door3.png "Open door")
+<p align="center">
+  <img src="./docs/imgs/tasks/open_door3.png" alt="Open door" width="80%">
+</p>
 
 ## Task: Probe circuit
 A fine grasping of the probe is perfoming thanks to the custom 3D printed fingertips. The circuit is therefore probed.
-![Probe circuit](./docs/imgs/tasks/probe2.png "Probe circuit")
+<p align="center">
+  <img src="./docs/imgs/tasks/probe2.png" alt="Probe circuit" width="80%">
+</p>
 
 ## Bring-your-own-device challenge
+For the transferability demo, we decided to make the robot open and probe an everyday tool, i.e. a gate opener remote. The robot needs to perform the following subtasks:
+
+- Turn on multimeter dial;
+- Open remote case;
+- Grasp the probes;
+- Probe the circuit;
+- Detect voltage and show it on GUI.
+
+<p align="center">
+  <img src="./docs/imgs/byod.png" alt="Bring Your Own Device" width="80%">
+</p>
 
 
 ## Repositories
@@ -56,15 +81,38 @@ A fine grasping of the probe is perfoming thanks to the custom 3D printed finger
 - [robothon-2023-fsm](https://github.com/hrii-iit/robothon-2023-fsm): Finite state machine to run the framework developed for the Robothon Grand Challenge 2023.
 
 ## Quick start
-For the quick start, please refere to the following [instructions](https://github.com/hrii-iit/robothon-2023-fsm#readme).
+Here you can find the instructions to run the framework developed by our team for the Robothon Grand Challenge 2023.
 
-### Usage
-To launch the fsm bringup, run the following command:
+### Prerequisites
+Clone libfranka (0.9.2) library and build it:
 ```bash
-roslaunch hrii_task_board_fsm main_fsm.launch
+git clone --recursive https://github.com/frankaemika/libfranka --branch 0.9.2
+
+```
+Enter libfranka folfer and execute these commands:
+```bash
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
+cmake --build .
 ```
 
-In the file config/fsm/default_task_order.yaml you can select the task execution order. You can also define a customized file that will be ignored by git, just create it in the same folder under the name custom_task_order.yaml
+### Installation instructions
+Clone in your catkin ws the *robothon-2023-fsm* package and its dependencies listed in the previous section. Build your ws.
+_Note:_ to make sure it compiles you also need some licensed packages, ask the repo owner.
+
+### Usage
+Test that everything works fine, launching the following command:
+```bash
+roslaunch hrii_task_board_fsm main_fsm.launch
+
+# if your camera is disconnected and want to run a fake perception node to test the tasks wun
+roslaunch hrii_task_board_fsm fake_perception.launch
+```
+
+### Tips
+In the file config/fsm/default_task_order.yaml you can select the task execution order.
+You can also define a customized file that will be ignored by git, just create it in the same folder under the name _custom_task_order.yaml_
 
 ## Team members
 
