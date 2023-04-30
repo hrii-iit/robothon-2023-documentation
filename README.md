@@ -1,37 +1,53 @@
 # Robothon Grand Challenge 2023 - Team Upcyclers report
-This repo contains the project documentation of the tasks developed by "Team Upcyclers" during the Robothon Grand Challenge 2023.
+This repo contains the project documentation of the tasks developed by "Team Upcyclers" from [HRII lab](https://hri.iit.it/)@[IIT](https://www.iit.it/it/home)  during the [Robothon Grand Challenge 2023](https://automatica-munich.com/en/munich-i/robothon/).
 
 ## Hardware setup
+The hardware setup is composed by two [Franka Emika](https://www.franka.de/) robots installed on a working table. An [Intel Realsense D435i](https://www.intelrealsense.com/depth-camera-d435i/) as been mounted on a Franka Emika end-effector. 
+![Hardware setup](./docs/imgs/hardware_setup.png "Hardware setup")
+
+
+Customized 3D printed fingertips have been designed: small tip for fine precision task (Press button and Move slider) and cross design to enable precise grasping of the probe from both directions. 
+<p align="center">
+  <img src="./docs/imgs/fingertips.png" alt= “Fingertips” width="100" height="90">
+</p>
 
 
 ## Software architecture
 
 
-## Task: Board localization
+![Software architecture](./docs/imgs/sw_architecture.png "Software architecture")
 
+## Task: Board localization
+In the initial stage, the camera uses color detection and the least squares method to accurately detect the blue and red buttons on the board and gain an initial perception of the board's location in the world frame using the urdf of the board. Later, the arm moves towards the board and uses visual servoing to detect specific features, position them at the center of the camera's field of view and improve the accuracy of the board's position and orientation estimation.
+![Board localization](./docs/imgs/tasks/board_localization.png "Board localization")
 
 ## Task: Press blue/red button
-
+![Press blue button](./docs/imgs/tasks/press_blue_button.png "Press blue button")
 
 ## Task: Move slider
-
+![Move slider](./docs/imgs/tasks/move_slider.png "Move slider")
 
 ## Task: Plug probe
-
+![Plug probe](./docs/imgs/tasks/moving_plug.png "Plug probe")
 
 ## Task: Open door
-
+![Open door](./docs/imgs/tasks/open_door3.png "Open door")
 
 ## Task: Probe circuit
-
+![Probe circuit](./docs/imgs/tasks/probe2.png "Probe circuit")
 
 ## Bring-your-own-device challenge
 
 
 ## Repositories
+- [robothon-2023-board-localization](https://github.com/hrii-iit/robothon-2023-board-localization): Vision module implemented for the task board localization.
+- [robothon-2023-byod](https://github.com/hrii-iit/robothon-2023-byod): "Bring Your Own Device" ROS-package.
+- [robothon-2023-msgs](https://github.com/hrii-iit/robothon-2023-msgs): This repo contains the messages and services needed to run the challenge.
+- [robothon-2023-board-description](https://github.com/hrii-iit/robothon-2023-board-description): This repository contains the description of the Robothon 2023 competition task board.
+- [robothon-2023-fsm](https://github.com/hrii-iit/robothon-2023-fsm): Finite state machine to run the framework developed for the Robothon Grand Challenge 2023.
 
+## Quick start
 
-## How to run
 
 ## Team members
 
