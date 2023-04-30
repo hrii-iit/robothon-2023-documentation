@@ -5,26 +5,28 @@ This repo contains the project documentation of the tasks developed by "Team Upc
 The hardware setup is composed by two [Franka Emika](https://www.franka.de/) robots installed on a working table. An [Intel Realsense D435i](https://www.intelrealsense.com/depth-camera-d435i/) as been mounted on a Franka Emika end-effector. 
 ![Hardware setup](./docs/imgs/hardware_setup.png "Hardware setup")
 
-
 Customized 3D printed fingertips have been designed: small tip for fine precision task (Press button and Move slider) and cross design to enable precise grasping of the probe from both directions. 
 <p align="center">
-  <img src="./docs/imgs/fingertips.png" alt= “Fingertips” width="100" height="90">
+  <img src="./docs/imgs/fingertips.png" alt= “Fingertips” width="35%" height="35%">
 </p>
 
-
 ## Software architecture
-
+The software architecture implemented for the competition relies on a finite state machine, where each task is a state. Through a reconfigurable config file, it is possible to define the execution order of the tasks.
 
 ![Software architecture](./docs/imgs/sw_architecture.png "Software architecture")
+
+A cartesian hybrid motion-force controller as been implemented in order to switch from motion control to force control.
 
 ## Task: Board localization
 In the initial stage, the camera uses color detection and the least squares method to accurately detect the blue and red buttons on the board and gain an initial perception of the board's location in the world frame using the urdf of the board. Later, the arm moves towards the board and uses visual servoing to detect specific features, position them at the center of the camera's field of view and improve the accuracy of the board's position and orientation estimation.
 ![Board localization](./docs/imgs/tasks/board_localization.png "Board localization")
 
 ## Task: Press blue/red button
+In press blue and button tasks, the robot approaches the button and apply a 10N force to it.
 ![Press blue button](./docs/imgs/tasks/press_blue_button.png "Press blue button")
 
 ## Task: Move slider
+The manipulator with the camera installed at the end-effector detect the reference triangle on the M5 display. The robot move the slider applying the computed displacement. This is repeated for the second reference.
 ![Move slider](./docs/imgs/tasks/move_slider.png "Move slider")
 
 ## Task: Plug probe
